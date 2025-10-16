@@ -91,7 +91,7 @@ const MainLogin = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full py-3 transition-all duration-500 ease-in-out rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-lg shadow-md hover:scale-105 hover:shadow-lg transition-all duration-200"
+                    className="w-full py-3 transition-all duration-500 ease-in-out rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-black font-bold text-lg shadow-md hover:scale-105 hover:shadow-lg transition-all duration-200"
                     onClick={handleSubmit}
                 >
                     Login

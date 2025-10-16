@@ -70,6 +70,7 @@ export default function Artifacts() {
         `${import.meta.env.VITE_BASE_URL}/api/default/getPipelineDetails/${workspaceId}/${artifact.id}`
       );
       setPipelineDetails(resp.data || resp);
+      console.log(resp.data || resp);
     } catch (err) {
       console.error(err);
       setPipelineDetails({ error: "Failed to fetch pipeline details" });

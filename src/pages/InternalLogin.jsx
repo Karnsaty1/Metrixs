@@ -89,7 +89,7 @@ const InternalLogin = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-3 transition-all duration-500 ease-in-out rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-lg shadow-md hover:scale-105 hover:shadow-lg"
+                        className="w-full py-3 transition-all duration-500 ease-in-out rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-black font-bold text-lg shadow-md hover:scale-105 hover:shadow-lg"
                     >
                         Login
                     </button>

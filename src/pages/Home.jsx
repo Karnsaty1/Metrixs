@@ -14,29 +14,32 @@ function Home() {
 
   const handleLogin = async () => {
     try {
-      const loginResponse = await instance.loginPopup({ scopes: ["User.Read"] });
+      const loginResponse = await instance.loginPopup({ scopes: ["https://api.fabric.microsoft.com/.default"] });
       instance.setActiveAccount(loginResponse.account);
 
       const accessToken=await instance.acquireTokenSilent({
         scopes: ["User.Read"],
         account:instance.getActiveAccount()
       });
+      const accessTokenFabric=await instance.acquireTokenSilent({
+        scopes: ["https://api.fabric.microsoft.com/.default"],
+        account:instance.getActiveAccount()
+      });
 
-
+      const body2={accessToken:accessToken.accessToken,accessTokenFabric:accessTokenFabric.accessToken};
       const body={idToken:loginResponse.idToken};
-      const body2={accessToken:accessToken.accessToken};
-      if (instance.getAllAccounts().length > 0) {
+      // if (instance.getAllAccounts().length > 0) {
         const response2=await postData(`${import.meta.env.VITE_BASE_URL}/api/auth/UPN`,body2);
         const response=await postData(`${import.meta.env.VITE_BASE_URL}/api/auth/microsoft`,body);
         console.log(response2.data.UPN.UPN);
-        localStorage.setItem("UPN",response2.data.UPN.UPN);
+        sessionStorage.setItem("UPN", JSON.stringify(response2.data.UPN.UPN));
         console.log(response2.data.exist);
         const isExisting=response2.data.exist
         console.log(response.data);
         if(!isExisting)
         navigate("/dashboard"); // only redirect on success  
         else navigate("/undashboard");    
-      }
+      // }
     } catch (error) {
       console.log("Login failed:", error);
     }
@@ -97,7 +100,7 @@ function Home() {
           </p>
           <button
             onClick={handleLogin}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 transition-all duration-300 ease-out min-w-[200px]"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-black font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 transition-all duration-300 ease-out min-w-[200px]"
           >
             <span className="relative z-10">Get Started</span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
